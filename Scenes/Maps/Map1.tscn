@@ -1,13 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Environment/Tilesheet/terrainTiles_default.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environment/Props/treeGreen_large.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environment/Props/treeBrown_large.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Environment/Props/crateWood.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Environment/Props/crateMetal.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/Turrets/GunT1.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Turrets/GunT2.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Turrets/MissileT1.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Environment/Tilesheet/Obstructed.png" type="Texture" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "terrainTiles_default.png 0"
@@ -116,6 +114,25 @@
 4/shape_one_way_margin = 0.0
 4/shapes = [  ]
 4/z_index = 0
+5/name = "Obstructed.png 5"
+5/texture = ExtResource( 6 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 64, 0, 64, 64 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -40, 608, -27.3642, 0.500565, 27.3642, -0.500565, 191, 608, -1.11362, 18.0407, 1.11362, -18.0407, 224, 575, 0, 0, 0, 0, 224, 321, -36.2776, 0.904142, 36.2776, -0.904142, 257, 288, 0, 0, 0, 0, 391, 288, 0.417137, -24.5277, -0.417137, 24.5277, 417, 310, 0, 0, 0, 0, 416, 447, -33.7437, -0.594603, 33.7437, 0.594603, 450, 480, -37.7748, 1.10355, 37.7748, -1.10355, 703, 480, 0, 0, 0, 0, 736, 445, 0, 25.6957, 0, -25.6957, 736, 309, 0, 0, 0, 0, 765, 287, -29.4507, 0.31498, 29.4507, -0.31498, 1151, 288, 0, 0, 0, 0, 1184, 254, -0.39685, 25.2, 0.39685, -25.2, 1184, 129, -6.4571, -0.551215, 6.4571, 0.551215, 1217, 96, 0, 0, 0, 0, 1381, 96 )
+}
 
 [node name="Map1" type="Node2D"]
 
@@ -131,11 +148,5 @@ tile_data = PoolIntArray( 0, 1, 0, 14, 3, 0, 16, 1, 0, 65537, 2, 0, 65542, 1, 0,
 
 [node name="Turrets" type="Node2D" parent="."]
 
-[node name="GunT1" parent="Turrets" instance=ExtResource( 6 )]
-position = Vector2( 473, 427 )
-
-[node name="GunT2" parent="Turrets" instance=ExtResource( 7 )]
-position = Vector2( 282, 232 )
-
-[node name="MissileT1" parent="Turrets" instance=ExtResource( 8 )]
-position = Vector2( 166, 546 )
+[node name="Path" type="Path2D" parent="."]
+curve = SubResource( 3 )
