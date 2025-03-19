@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 
-var tower_range = 350
 
 
 func set_tower_preview(tower_type, mouse_position):
