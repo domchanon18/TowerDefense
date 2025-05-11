@@ -8,16 +8,19 @@ var build_location
 var build_type
 
 var current_wave = 1
-var enemies_in_wave = GameData.enemywaveLV1
+var enemies_in_wave = GameData.enemywaveLV3
 
 var popup_scene = preload("res://Scenes/UIScenes/Pop_up_Menu.tscn")  # เปลี่ยนเส้นทางให้ถูกต้อง
 var popup_instance  # ตัวแปรสำหรับเก็บอินสแตนซ์ของ Popup
-var popup_vic = preload("res://Scenes/UIScenes/pop_up_victory.tscn")
+var popup_vic = preload("res://Scenes/UIScenes/pop_up_victory2.tscn")
 var popup_vicinstance
 
 onready var money_label = get_node("UI/HBoxContainer/Money")
 onready var play_pause = get_node("UI/HUD/HBoxContainer/play_paused")
 onready var x2_button = get_node("UI/HUD/HBoxContainer/X2")
+
+
+
 
 
 
@@ -37,7 +40,7 @@ func _ready():
 	
 	
 	
-	map_node = get_node("Map1") 
+	map_node = get_node("Map3") 
 	
 	# เชื่อมต่อปุ่มสำหรับการสร้างตึก
 	for i in get_tree().get_nodes_in_group("build_buttons"):
@@ -134,7 +137,6 @@ func spawn_enemies(wave_data):
 		var new_enemy = load("res://Scenes/Enemies/" + i[0] + ".tscn").instance()
 		map_node.get_node("Path").add_child(new_enemy, true)
 		yield(get_tree().create_timer(i[1]),"timeout")
-		
 
 # ฟังก์ชันที่เกี่ยวข้องกับการหยุดและเร่งความเร็วเกม
 func _paused():  
@@ -200,14 +202,6 @@ func _on_quit_pressed():
 	get_tree().change_scene("res://SceneHandler.tscn")
 
 
-func _on_nextlevel_pressed():
-	get_tree().reload_current_scene()
-	GameData.money = 200
-	GameData.enemies_destroy = 0
-	Engine.time_scale = 1
-	get_tree().change_scene("res://Scenes/MainScenes/GameScene2.tscn")
-
-
 
 # ฟังก์ชันที่ใช้แสดงผลเงินใน Label
 func _update_money_display():
@@ -232,7 +226,6 @@ func show_victory_popup():
 	if popup_vicinstance == null:
 		popup_vicinstance = popup_vic.instance()
 		add_child(popup_vicinstance)
-		popup_vicinstance.get_node("NextLevel").connect("pressed", self, "_on_nextlevel_pressed")
 		popup_vicinstance.get_node("MainMenu").connect("pressed", self, "_on_quit_pressed")
 
 	else:

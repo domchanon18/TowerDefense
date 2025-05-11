@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Effects/explode.png" type="Texture" id=1]
+
+[node name="explode" type="Node2D"]
+
+[node name="Explode" type="Sprite" parent="."]
+position = Vector2( 4.5, 9.05991e-06 )
+scale = Vector2( 0.236328, 0.21875 )
+texture = ExtResource( 1 )
